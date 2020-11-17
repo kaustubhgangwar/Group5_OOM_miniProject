@@ -10,16 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author hp
- */
 public class class4 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form class4
-     */
-//    ArrayList<ArrayList<String>>userID=new ArrayList<ArrayList<String>>();
+  
     
     int[][] a1=new int[25][61];
     int[][] a2=new int[25][61];
