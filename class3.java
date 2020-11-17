@@ -14,13 +14,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class class3 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form class3
-     */
-//    class2 obj;
+   
+
     int avl,num,cnt=0,tot=0;
     String bName;
-//    ArrayList<ArrayList<String>>userID=new ArrayList<ArrayList<String>>();//[1]
     
     float[] enh = new float[100000];
     float[] enm = new float[100000];
@@ -33,7 +30,7 @@ public class class3 extends javax.swing.JFrame {
         initComponents();
     }
     
-//    class 1 se aaya hai
+
     public class3(int tot1,int num1, String bName1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1) 
     {
         tot=tot1;
@@ -54,34 +51,6 @@ public class class3 extends javax.swing.JFrame {
     }
     
 
-//    public class3(ArrayList<class2> userD, int i, int num2,int cnt1) {
-////        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        
-//        for(class2 x : userD)
-//        {
-//            rpt.add(x);
-//        }
-//        avl=i;
-//        num=num2;
-//        cnt=cnt1;
-//          
-//    }
-
-//    public class3(ArrayList<ArrayList<String>> user, int x, int num2, int cnt1) {
-////        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        
-//        for(int i=0;i<user.size();++i)
-//        {
-//            userID.add(user.get(i));
-//        }
-//        avl=x;
-//        num=num2;
-//        cnt=cnt1;
-//        initComponents();
-//        
-//        
-//    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
