@@ -33,7 +33,7 @@ public class class1 extends javax.swing.JFrame {
     int tot=0,cnt=0,num=0;
     String bName;
     
-//    classMain se aaya hai
+
     public class1(int tot1,String s1,int cnt1) {
         
         tot=tot1;
@@ -43,7 +43,7 @@ public class class1 extends javax.swing.JFrame {
     }
     
 
-//    class 3 se aaya hai
+
     class1(int tot1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1) {
         
         tot=tot1;
