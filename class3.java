@@ -14,10 +14,22 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class class3 extends javax.swing.JFrame {
 
-   
-
+    /**
+     * Creates new form class3
+     */
+    
+    int[][] adc=new int[25][61];
+    int[][] adg=new int[25][61];
+    int[][] Ic=new int[25][61];
+    int[][] Ig=new int[25][61];
+    int[][] IIc=new int[25][61];
+    int[][] IIg=new int[25][61];
+    int[][] IIIc=new int[25][61];
+    int[][] IIIg=new int[25][61];
+    
     int avl,num,cnt=0,tot=0;
     String bName;
+    
     
     float[] enh = new float[100000];
     float[] enm = new float[100000];
@@ -30,9 +42,9 @@ public class class3 extends javax.swing.JFrame {
         initComponents();
     }
     
-
-    public class3(int tot1,int num1, String bName1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1) 
-    {
+//    class 1 se aaya hai
+    class3(int tot1, int num1, String bName1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1, int[][] ad1, int[][] ad2, int[][] I1, int[][] I2, int[][] II1, int[][] II2, int[][] III1, int[][] III2) {
+        
         tot=tot1;
         num=num1;
         bName=bName1;
@@ -47,10 +59,26 @@ public class class3 extends javax.swing.JFrame {
             exm[i]=exm1[i];
         }
         
+        for(int i=0;i<24;++i)
+        {
+            for(int j=0;j<60;++j)
+            {
+                adc[i][j]=ad1[i][j];
+                adg[i][j]=ad2[i][j];
+                Ic[i][j]=I1[i][j];
+                Ig[i][j]=I2[i][j];
+                IIc[i][j]=II1[i][j];
+                IIg[i][j]=II2[i][j];
+                IIIc[i][j]=III1[i][j];
+                IIIg[i][j]=III2[i][j];
+            }
+        }
+        
         initComponents();
     }
-    
 
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,7 +197,7 @@ public class class3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         
-        class4 c4=new class4(enh,enm,exh,exm,cnt,tot);
+        class4 c4=new class4(bName,enh,enm,exh,exm,cnt,tot,adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
         c4.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -238,29 +266,6 @@ public class class3 extends javax.swing.JFrame {
         
         num=0;
         //
-//        for(int i=0;i<userID.size();++i)
-//        {
-//            for(int j=0;j<userID.get(i).size();++j)
-//            {
-//                if(j==0)
-//                t2.append("check-in-time: " + userID.get(i).get(j) + "\n");
-//                if(j==1)
-//                t2.append("check-out-time: " + userID.get(i).get(j) + "\n");
-//                if(j==2)
-//                t2.append("Date : " + userID.get(i).get(j) + "\n");
-//            }
-////            t2.setText(userID.get(i));
-//            
-//        }
-//        System.out.println("UserID Size : " + userID.size());//[-]
-//        
-//        for(int i=0;i<userID.size();++i)
-//	{
-////		    for(int j=0;j<user.get(i).size();++j)
-////                  {
-//            System.out.println(userID.get(i));
-////		    }
-//	}
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -268,7 +273,7 @@ public class class3 extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        dispose();
         
-        class1 cc1=new class1(tot,cnt,enh,enm,exh,exm);
+        class1 cc1=new class1(bName,tot,cnt,enh,enm,exh,exm,adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
         cc1.setVisible(true);
         
         
