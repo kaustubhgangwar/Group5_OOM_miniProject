@@ -10,9 +10,24 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author hp
+ */
 public class class4 extends javax.swing.JFrame {
 
-  
+    /**
+     * Creates new form class4
+     */
+    int[][] adc=new int[25][61];
+    int[][] adg=new int[25][61];
+    int[][] Ic=new int[25][61];
+    int[][] Ig=new int[25][61];
+    int[][] IIc=new int[25][61];
+    int[][] IIg=new int[25][61];
+    int[][] IIIc=new int[25][61];
+    int[][] IIIg=new int[25][61];
+    
     
     int[][] a1=new int[25][61];
     int[][] a2=new int[25][61];
@@ -23,19 +38,21 @@ public class class4 extends javax.swing.JFrame {
     float[] exm = new float[100000];
     
     int cnt=0,tot=0,flag=1;
+    String bName;
     
     public class4() {
         initComponents();
     }
 
 
-
-    class4(float[] enh1, float[] enm1, float[] exh1, float[] exm1, int cnt1, int tot1) {
+    // class 3 se aaya hai
+    class4(String bName1, float[] enh1, float[] enm1, float[] exh1, float[] exm1, int cnt1, int tot1, int[][] ad1, int[][] ad2, int[][] I1, int[][] I2, int[][] II1, int[][] II2, int[][] III1, int[][] III2) {
         
+        bName=bName1;
         cnt=cnt1;
         tot=tot1;
         
-        System.out.println("------");
+        System.out.println("------" + bName);
         
         for(int i=0;i<cnt;++i)
         {
@@ -43,22 +60,48 @@ public class class4 extends javax.swing.JFrame {
             int y=(int)enm1[i];
             
             System.out.println(x + " " + y);
+            if(bName.equals("Auditorium")) adc[x][y]++;
+            if(bName.equals("CC-I")) Ic[x][y]++;
+            if(bName.equals("CCtwo")) IIc[x][y]++;
+            if(bName.equals("CC-III")) IIIc[x][y]++;
+            
             a1[x][y]++;
             
             x=(int)exh1[i];
             y=(int)exm1[i];
             
             System.out.println(x + " " + y);
+            if(bName.equals("Auditorium")) adg[x][y]++;
+            if(bName.equals("CC-I")) Ig[x][y]++;
+            if(bName.equals("CCtwo")) IIg[x][y]++;
+            if(bName.equals("CC-III")) IIIg[x][y]++;
+            
             a2[x][y]++;
             
             System.out.println("-.-.-.-");
         }
         
-//        for(int i=0;i<cnt;++i)
+        for(int i=0;i<24;++i)
+        {
+            for(int j=0;j<60;++j)
+            {
+                adc[i][j]+=ad1[i][j];
+                adg[i][j]+=ad2[i][j];
+                Ic[i][j]+=I1[i][j];
+                Ig[i][j]+=I2[i][j];
+                IIc[i][j]+=II1[i][j];
+                IIg[i][j]+=II2[i][j];
+                IIIc[i][j]+=III1[i][j];
+                IIIg[i][j]+=III2[i][j];
+            }
+        }
+        
+//        for(int i=0;i<24;++i)
 //        {
-//            for(int j=0;j<cnt;++j)
+//            for(int j=0;j<60;++j)
 //            {
-//                System.out.println(a1[i][j] + " ");
+//                if(a1[i][j]!=0)
+//                System.out.println(a1[i][j] + " " + IIc[i][j]);
 //            }
 //        }
         
@@ -84,6 +127,11 @@ public class class4 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +173,31 @@ public class class4 extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auditorium", "CC-I", "CCtwo", "CC-III" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("OK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setEditable(false);
+
+        jButton3.setText("Show");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,35 +221,64 @@ public class class4 extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(62, 62, 62)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(36, 93, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(62, 62, 62)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(17, 17, 17)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextField1))))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(jButton2)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel3)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton3)
+                        .addGap(63, 63, 63))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(91, 91, 91)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
@@ -197,7 +299,7 @@ public class class4 extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         
-        classMain h=new classMain();
+        classMain h=new classMain(adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
         h.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -209,22 +311,84 @@ public class class4 extends javax.swing.JFrame {
          
             for(int i=0;i<=23;++i)
             {
-                for(int j=0;j<59;++j)
+                for(int j=0;j<=59;++j)
                 {
-                    if(a1[i][j]!=0)
+                    if(bName.equals("Auditorium"))
                     {
-                        if(j<10)
-                            in.append("Time-" + i + ":0" + j + ", " + "Users : " + a1[i][j] + "\n");
-                        else
-                            in.append("Time-" + i + ":" + j + ", " + "Users : " + a1[i][j] + "\n");
-                    }
+                        jLabel4.setText("Auditorium");
+                        
+                        if(adc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + adc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + adc[i][j] + "\n");
+                        }
 
-                    if(a2[i][j]!=0)
+                        if(adg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + adg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + adg[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CC-I"))
                     {
-                        if(j<10)
-                            out.append("Time-" + i + ":0" + j + ", " + "Users : " + a2[i][j] + "\n");
-                        else
-                            out.append("Time-" + i + ":" + j + ", " + "Users : " + a2[i][j] + "\n");
+                        jLabel4.setText("CC-I");
+                        if(Ic[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + Ic[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + Ic[i][j] + "\n");
+                        }
+
+                        if(Ig[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + Ig[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + Ig[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CCtwo"))
+                    {
+                        jLabel4.setText("CC-II");
+                        if(IIc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + IIc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + IIc[i][j] + "\n");
+                        }
+
+                        if(IIg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + IIg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + IIg[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CC-III"))
+                    {
+                        jLabel4.setText("CC-III");
+                        if(IIIc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + IIIc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + IIIc[i][j] + "\n");
+                        }
+
+                        if(IIIg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + IIIg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + IIIg[i][j] + "\n");
+                        }
                     }
                 }
             }
@@ -234,6 +398,111 @@ public class class4 extends javax.swing.JFrame {
         flag=0;
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String[] items = {"Auditorium", "CC-I", "CCtwo", "CC-III"};
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText(jComboBox1.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        bName=jTextField1.getText();
+        
+        in.setText("");
+        out.setText("");;
+        
+        for(int i=0;i<=23;++i)
+            {
+                for(int j=0;j<=59;++j)
+                {
+                    if(bName.equals("Auditorium"))
+                    {
+                        jLabel4.setText("Auditorium");
+                        
+                        if(adc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + adc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + adc[i][j] + "\n");
+                        }
+
+                        if(adg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + adg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + adg[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CC-I"))
+                    {
+                        jLabel4.setText("CC-I");
+                        if(Ic[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + Ic[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + Ic[i][j] + "\n");
+                        }
+
+                        if(Ig[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + Ig[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + Ig[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CCtwo"))
+                    {
+                        jLabel4.setText("CC-II");
+                        if(IIc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + IIc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + IIc[i][j] + "\n");
+                        }
+
+                        if(IIg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + IIg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + IIg[i][j] + "\n");
+                        }
+                    }
+                    if(bName.equals("CC-III"))
+                    {
+                        jLabel4.setText("CC-III");
+                        if(IIIc[i][j]!=0)
+                        {
+                            if(j<10)
+                                in.append("Time-" + i + ":0" + j + ", " + "Users : " + IIIc[i][j] + "\n");
+                            else
+                                in.append("Time-" + i + ":" + j + ", " + "Users : " + IIIc[i][j] + "\n");
+                        }
+
+                        if(IIIg[i][j]!=0)
+                        {
+                            if(j<10)
+                                out.append("Time-" + i + ":0" + j + ", " + "Users : " + IIIg[i][j] + "\n");
+                            else
+                                out.append("Time-" + i + ":" + j + ", " + "Users : " + IIIg[i][j] + "\n");
+                        }
+                    }
+                }
+            }
+
+            JOptionPane.showMessageDialog(null,"Data Saved.");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,13 +542,18 @@ public class class4 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea in;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea out;
     // End of variables declaration//GEN-END:variables
 }
