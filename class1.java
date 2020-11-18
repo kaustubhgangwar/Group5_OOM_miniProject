@@ -18,6 +18,15 @@ public class class1 extends javax.swing.JFrame {
     /**
      * Creates new form class1
      */
+    int[][] adc=new int[25][61];
+    int[][] adg=new int[25][61];
+    int[][] Ic=new int[25][61];
+    int[][] Ig=new int[25][61];
+    int[][] IIc=new int[25][61];
+    int[][] IIg=new int[25][61];
+    int[][] IIIc=new int[25][61];
+    int[][] IIIg=new int[25][61];
+    
     
     float[] enh = new float[100000];
     float[] enm = new float[100000];
@@ -33,21 +42,39 @@ public class class1 extends javax.swing.JFrame {
     int tot=0,cnt=0,num=0;
     String bName;
     
-
-    public class1(int tot1,String s1,int cnt1) {
+    
+    
+    //classMian se aaya hai
+    class1(int tot1, String bName1, int cnt1, int[][] ad1, int[][] ad2, int[][] I1, int[][] I2, int[][] II1, int[][] II2, int[][] III1, int[][] III2) {
         
         tot=tot1;
-        bName=s1;
+        bName=bName1;
         cnt=cnt1;
+        
+        for(int i=0;i<24;++i)
+        {
+            for(int j=0;j<60;++j)
+            {
+                adc[i][j]=ad1[i][j];
+                adg[i][j]=ad2[i][j];
+                Ic[i][j]=I1[i][j];
+                Ig[i][j]=I2[i][j];
+                IIc[i][j]=II1[i][j];
+                IIg[i][j]=II2[i][j];
+                IIIc[i][j]=III1[i][j];
+                IIIg[i][j]=III2[i][j];
+            }
+        }
+        
         initComponents();
     }
-    
 
-
-    class1(int tot1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1) {
+    // class 3 se aaya hai
+    class1(String bName1, int tot1, int cnt1, float[] enh1, float[] enm1, float[] exh1, float[] exm1, int[][] ad1, int[][] ad2, int[][] I1, int[][] I2, int[][] II1, int[][] II2, int[][] III1, int[][] III2) {
         
         tot=tot1;
         cnt+=cnt1;
+        bName=bName1;
         
         for(int i=0;i<cnt;++i)
         {
@@ -55,6 +82,21 @@ public class class1 extends javax.swing.JFrame {
             enm[i]=enm1[i];
             exh[i]=exh1[i];
             exm[i]=exm1[i];
+        }
+        
+        for(int i=0;i<24;++i)
+        {
+            for(int j=0;j<60;++j)
+            {
+                adc[i][j]=ad1[i][j];
+                adg[i][j]=ad2[i][j];
+                Ic[i][j]=I1[i][j];
+                Ig[i][j]=I2[i][j];
+                IIc[i][j]=II1[i][j];
+                IIg[i][j]=II2[i][j];
+                IIIc[i][j]=III1[i][j];
+                IIIg[i][j]=III2[i][j];
+            }
         }
         
         initComponents();
@@ -191,7 +233,7 @@ public class class1 extends javax.swing.JFrame {
         {
             dispose();
 
-            class3 cc3=new class3(tot,num,bName,cnt,enh,enm,exh,exm);
+            class3 cc3=new class3(tot,num,bName,cnt,enh,enm,exh,exm,adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
             cc3.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
