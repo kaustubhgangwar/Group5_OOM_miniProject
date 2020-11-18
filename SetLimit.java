@@ -16,7 +16,37 @@ public class SetLimit extends javax.swing.JFrame {
      */
     int total=0;
     
+    int[][] adc=new int[25][61];
+    int[][] adg=new int[25][61];
+    int[][] Ic=new int[25][61];
+    int[][] Ig=new int[25][61];
+    int[][] IIc=new int[25][61];
+    int[][] IIg=new int[25][61];
+    int[][] IIIc=new int[25][61];
+    int[][] IIIg=new int[25][61];
+    
     public SetLimit() {
+        initComponents();
+    }
+
+    //classMain se aaya hai
+    public SetLimit(int[][] ad1, int[][] ad2, int[][] I1, int[][] I2, int[][] II1, int[][] II2, int[][] III1, int[][] III2) {
+        
+        for(int i=0;i<24;++i)
+        {
+            for(int j=0;j<60;++j)
+            {
+                adc[i][j]=ad1[i][j];
+                adg[i][j]=ad2[i][j];
+                Ic[i][j]=I1[i][j];
+                Ig[i][j]=I2[i][j];
+                IIc[i][j]=II1[i][j];
+                IIg[i][j]=II2[i][j];
+                IIIc[i][j]=III1[i][j];
+                IIIg[i][j]=III2[i][j];
+            }
+        }
+        
         initComponents();
     }
 
@@ -97,7 +127,7 @@ public class SetLimit extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         
-        classMain cm=new classMain(total);
+        classMain cm=new classMain(total,adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
         cm.setVisible(true);
         
 //        System.close(0);
@@ -114,7 +144,7 @@ public class SetLimit extends javax.swing.JFrame {
             
             total=Integer.parseInt(jTextField1.getText());
 
-            classMain cm=new classMain(total);
+            classMain cm=new classMain(total,adc,adg,Ic,Ig,IIc,IIg,IIIc,IIIg);
             cm.setVisible(true);
             
         }
